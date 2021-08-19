@@ -47,8 +47,8 @@ print('a = ', pyro.param("a").item())
 print('b = ', pyro.param("b").item())
 
 plt.figure(2)
-plt.subplot(1,2,1)
-plt.plot([0,num_steps],[9.14,9.14], 'k:')
+plt.subplot(1, 2, 1)
+plt.plot([0, num_steps], [9.14, 9.14], 'k:')
 plt.plot(a)
 plt.ylabel('a')
 
