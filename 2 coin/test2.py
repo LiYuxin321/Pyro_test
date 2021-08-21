@@ -63,16 +63,18 @@ for step in range(n_steps):
     if step % 100 == 0:
         print('.', end='')
 
+# 上面的工作等于我们用先验知识 B(10,10)和实验数据data，拟合了一个后验概率的分布（beta分布）
+# 下面是求我们拟合出的分布的均值和方差作为实验结论，类似属于决策论部分
 # grab the learned variational parameters
 alpha_q = pyro.param("alpha_q").item()
 beta_q = pyro.param("beta_q").item()
 
 # here we use some facts about the beta distribution
-# compute the inferred mean of the coin's fairness
+# compute the inferred mean of the 2 coin's fairness
 inferred_mean = alpha_q / (alpha_q + beta_q)
 # compute inferred standard deviation
 factor = beta_q / (alpha_q * (1.0 + alpha_q + beta_q))
 inferred_std = inferred_mean * math.sqrt(factor)
 
 print("\nbased on the data and our prior belief, the fairness " +
-      "of the coin is %.3f +- %.3f" % (inferred_mean, inferred_std))
+      "of the 2 coin is %.3f +- %.3f" % (inferred_mean, inferred_std))
